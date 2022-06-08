@@ -7,12 +7,13 @@ export function ApiStack({ stack, app }) {
   // Create the API
   const api = new Api(stack, "Api", {
     defaults: {
-      function: {
-        permissions: [table],
-        environment: {
-          TABLE_NAME: table.tableName,
+        authorizer: "iam",
+        function: {
+            permissions: [table],
+            environment: {
+            TABLE_NAME: table.tableName,
+            },
         },
-      },
     },
     routes: {
       "POST /notes": "functions/create.main",
